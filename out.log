@@ -1,8 +1,10 @@
-Visual Basic.Net Compiler version 0.0.0.5943 (Mono 3.8 - mono-4.0.0-branch/0669cae)
-Copyright (C) 2004-2010 Rolf Bjarne Kvinge. All rights reserved.
+Microsoft (R) Visual C# Compiler version 4.6.1038.0
+for C# 5
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+This compiler is provided as part of the Microsoft (R) .NET Framework, but only supports language versions up to C# 5, which is no longer the latest version. For compilers that support newer versions of the C# programming language, see http://go.microsoft.com/fwlink/?LinkID=533240
 
-vbnc : Command line : warning VBNC2009: the option platform was not recognized - ignored
-Assembly 'battleships, Version=0.0, Culture=neutral, PublicKeyToken=null' saved successfully to '/Users/cwoodward/Desktop/battleships/bin/Debug/battleships.exe'.
-There were 0 errors and 1 warnings.
-Compilation successful
-Compilation took 00:00:00.9190030
+src\Model\SeaGrid.cs(29,36): error CS0071: An explicit interface implementation of an event must use event accessor syntax
+src\Model\SeaGrid.cs(29,44): error CS1519: Invalid token ';' in class, struct, or interface member declaration
+src\Model\SeaGridAdapter.cs(62,36): error CS0071: An explicit interface implementation of an event must use event accessor syntax
+src\Model\SeaGridAdapter.cs(62,44): error CS1519: Invalid token ';' in class, struct, or interface member declaration
