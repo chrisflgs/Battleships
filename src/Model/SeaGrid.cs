@@ -59,8 +59,7 @@ public class SeaGrid : ISeaGrid
 	/// <param name="x">x coordinate of the tile</param>
 	/// <param name="y">y coordiante of the tile</param>
 	/// <returns></returns>
-	public TileView this[int x, int y]
-	{
+	public TileView this[int x, int y] {
 		get { return _GameTiles[x, y].View; }
 	}
 
@@ -89,7 +88,8 @@ public class SeaGrid : ISeaGrid
 		int i = 0;
 		for (i = 0; i <= Width - 1; i++) {
 			for (int j = 0; j <= Height - 1; j++) {
-				_GameTiles[i, j] = new Tile(i, j, null);
+				//Missing patch for this bug VVV
+				_GameTiles(i, j) = new Tile(i, j, null);
 			}
 		}
 

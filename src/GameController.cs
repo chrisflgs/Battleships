@@ -3,7 +3,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-//using System.Data;
+using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
 
@@ -51,7 +51,7 @@ public static class GameController
 		get { return _ai; }
 	}
 
-	static GameController()
+	public GameController()
 	{
 		//bottom state will be quitting. If player exits main menu then the game is over
 		_state.Push(GameState.Quitting);
@@ -122,23 +122,23 @@ public static class GameController
 	private static void PlayHitSequence(int row, int column, bool showAnimation)
 	{
 		if (showAnimation) {
-			UtilityFunctions.AddExplosion(row, column);
+			AddExplosion(row, column);
 		}
 
-		Audio.PlaySoundEffect(GameResources.GameSound("Hit"));
+		Audio.PlaySoundEffect(GameSound("Hit"));
 
-		UtilityFunctions.DrawAnimationSequence();
+		DrawAnimationSequence();
 	}
 
 	private static void PlayMissSequence(int row, int column, bool showAnimation)
 	{
 		if (showAnimation) {
-			UtilityFunctions.AddSplash(row, column);
+			AddSplash(row, column);
 		}
 
-		Audio.PlaySoundEffect(GameResources.GameSound("Miss"));
+		Audio.PlaySoundEffect(GameSound("Miss"));
 
-		UtilityFunctions.DrawAnimationSequence();
+		DrawAnimationSequence();
 	}
 
 	/// <summary>
@@ -155,30 +155,30 @@ public static class GameController
 		isHuman = object.ReferenceEquals(_theGame.Player, HumanPlayer);
 
 		if (isHuman) {
-			UtilityFunctions.Message = "You " + result.ToString();
+			Message = "You " + result.ToString();
 		} else {
-			UtilityFunctions.Message = "The AI " + result.ToString();
+			Message = "The AI " + result.ToString();
 		}
 
 		switch (result.Value) {
 			case ResultOfAttack.Destroyed:
 				PlayHitSequence(result.Row, result.Column, isHuman);
-				Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+				Audio.PlaySoundEffect(GameSound("Sink"));
 
 				break;
 			case ResultOfAttack.GameOver:
 				PlayHitSequence(result.Row, result.Column, isHuman);
-				Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+				Audio.PlaySoundEffect(GameSound("Sink"));
 
-				while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink"))) {
+				while (Audio.SoundEffectPlaying(GameSound("Sink"))) {
 					SwinGame.Delay(10);
 					SwinGame.RefreshScreen();
 				}
 
 				if (HumanPlayer.IsDestroyed) {
-					Audio.PlaySoundEffect(GameResources.GameSound("Lose"));
+					Audio.PlaySoundEffect(GameSound("Lose"));
 				} else {
-					Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+					Audio.PlaySoundEffect(GameSound("Winner"));
 				}
 
 				break;
@@ -189,7 +189,7 @@ public static class GameController
 				PlayMissSequence(result.Row, result.Column, isHuman);
 				break;
 			case ResultOfAttack.ShotAlready:
-				Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+				Audio.PlaySoundEffect(GameSound("Error"));
 				break;
 		}
 	}
@@ -275,29 +275,29 @@ public static class GameController
 
 		switch (CurrentState) {
 			case GameState.ViewingMainMenu:
-				MenuController.HandleMainMenuInput();
+				HandleMainMenuInput();
 				break;
 			case GameState.ViewingGameMenu:
-				MenuController.HandleGameMenuInput();
+				HandleGameMenuInput();
 				break;
 			case GameState.AlteringSettings:
-				MenuController.HandleSetupMenuInput();
+				HandleSetupMenuInput();
 				break;
 			case GameState.Deploying:
-				DeploymentController.HandleDeploymentInput();
+				HandleDeploymentInput();
 				break;
 			case GameState.Discovering:
-				DiscoveryController.HandleDiscoveryInput();
+				HandleDiscoveryInput();
 				break;
 			case GameState.EndingGame:
-				EndingGameController.HandleEndOfGameInput();
+				HandleEndOfGameInput();
 				break;
 			case GameState.ViewingHighScores:
-				HighScoreController.HandleHighScoreInput();
+				HandleHighScoreInput();
 				break;
 		}
 
-		UtilityFunctions.UpdateAnimations();
+		UpdateAnimations();
 	}
 
 	/// <summary>
@@ -308,33 +308,33 @@ public static class GameController
 	/// </remarks>
 	public static void DrawScreen()
 	{
-		UtilityFunctions.DrawBackground();
+		DrawBackground();
 
 		switch (CurrentState) {
 			case GameState.ViewingMainMenu:
-				MenuController.DrawMainMenu();
+				DrawMainMenu();
 				break;
 			case GameState.ViewingGameMenu:
-				MenuController.DrawGameMenu();
+				DrawGameMenu();
 				break;
 			case GameState.AlteringSettings:
-				MenuController.DrawSettings();
+				DrawSettings();
 				break;
 			case GameState.Deploying:
-				DeploymentController.DrawDeployment();
+				DrawDeployment();
 				break;
 			case GameState.Discovering:
-				DiscoveryController.DrawDiscovery();
+				DrawDiscovery();
 				break;
 			case GameState.EndingGame:
-				EndingGameController.DrawEndOfGame();
+				DrawEndOfGame();
 				break;
 			case GameState.ViewingHighScores:
-				HighScoreController.DrawHighScores();
+				DrawHighScores();
 				break;
 		}
 
-		UtilityFunctions.DrawAnimations();
+		DrawAnimations();
 
 		SwinGame.RefreshScreen();
 	}
@@ -347,7 +347,7 @@ public static class GameController
 	public static void AddNewState(GameState state)
 	{
 		_state.Push(state);
-		UtilityFunctions.Message = "";
+		Message = "";
 	}
 
 	/// <summary>
@@ -378,3 +378,10 @@ public static class GameController
 	}
 
 }
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================
