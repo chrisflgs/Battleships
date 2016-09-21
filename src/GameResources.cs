@@ -280,7 +280,7 @@ public static class GameResources
 	}
 
 	private static void FreeSounds()
-	{
+	{		
 		foreach (SoundEffect obj in _Sounds.Values) {
 			Audio.FreeSoundEffect(obj);
 		}
@@ -288,6 +288,7 @@ public static class GameResources
 
 	private static void FreeMusic()
 	{
+
 		foreach (Music obj in _Music.Values) {
 			Audio.FreeMusic(obj);
 		}
@@ -302,10 +303,3 @@ public static class GameResources
 		SwinGame.ProcessEvents();
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
