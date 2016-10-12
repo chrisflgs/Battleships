@@ -160,6 +160,7 @@ public static class GameController
 			UtilityFunctions.Message = "The AI " + result.ToString();
 		}
 
+
 		switch (result.Value) {
 			case ResultOfAttack.Destroyed:
 				PlayHitSequence(result.Row, result.Column, isHuman);
@@ -190,6 +191,8 @@ public static class GameController
 				break;
 			case ResultOfAttack.ShotAlready:
 				Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+				//Only use to test entering highscores
+				//EndingGameController.HandleEndOfGameInput();
 				break;
 		}
 	}
