@@ -191,7 +191,7 @@ public class AIHardPlayer : AIPlayer
 	private void ProcessDestroy(int row, int col, Ship ship)
 	{
 		bool foundOriginal = false;
-		Location source = null;
+		Location source = default(Location);
 		Target current = null;
 		current = _CurrentTarget;
 
